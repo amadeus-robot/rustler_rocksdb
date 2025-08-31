@@ -8,7 +8,7 @@ defmodule RustlerRocksDB.MixProject do
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      compilers: Mix.compilers() ++ [:rustler],
+      compilers: Mix.compilers(),
       rustler_crates: rustler_crates()
     ]
   end

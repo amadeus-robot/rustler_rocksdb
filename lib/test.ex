@@ -12,7 +12,7 @@ defmodule Test do
       :world
 
   """
-  def hello do
+  def hello(path \\ "/root/.cache/amadeusd/") do
     cf =
       [
         "tx_receiver_nonce|receiver:nonce->txhash",
@@ -34,14 +34,20 @@ defmodule Test do
 
     {:ok, db_ref, cfs} =
       RustlerRocksDB.open_optimistic_transaction_db(
-        "/home/sdancer/projects/ama/db/fabric/",
+        path <> "/db/fabric/",
         nil,
         cf
       )
   end
 
   def iter_all() do
-    m = Enum.map(1..10_000_000, fn x -> RustlerRocksDB.iterator_next(it) end)
+    it = nil
+
+    m =
+      Enum.map(1..10_000_000, fn x ->
+        RustlerRocksDB.iterator_next(it)
+      end)
+
     Enum.each(m, fn {a, v} -> IO.puts(StringInspector.inspect_with_hex(a)) end)
   end
 end
