@@ -73,10 +73,7 @@ fn main() {
                         );
                     }
                     Err(e) => {
-                        eprintln!(
-                            "  -> An error occurred while dumping '{}': {}",
-                            cf_name, e
-                        );
+                        eprintln!("  -> An error occurred while dumping '{}': {}", cf_name, e);
                     }
                 }
             }
